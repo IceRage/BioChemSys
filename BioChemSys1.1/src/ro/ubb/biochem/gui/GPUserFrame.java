@@ -42,6 +42,7 @@ import ro.ubb.biochem.algorithm.Algorithm;
 import ro.ubb.biochem.algorithm.AlgorithmSettings;
 import ro.ubb.biochem.algorithm.GPAlgorithm;
 import ro.ubb.biochem.algorithm.UserStopCondition;
+import ro.ubb.biochem.exceptions.InvalidInputException;
 import ro.ubb.biochem.gui.plotting.ConcentrationsPlotWindow;
 import ro.ubb.biochem.gui.plotting.FitnessPlotWindow;
 import ro.ubb.biochem.operators.Crossover;
@@ -513,9 +514,15 @@ public class GPUserFrame extends JFrame implements ActionListener, AlgorithmList
 				return;
 			}
 
-			UserStopCondition.start();
-			algorithm = new GPAlgorithm(algorithmSettings);
+			try {
+				algorithm = new GPAlgorithm(algorithmSettings);
+			} catch (InvalidInputException exception) {
+				showErrorMessage(exception.getMessage());
+				return;
+			}
+			
 			algorithm.addAlgorithmListener(this);
+			UserStopCondition.start();
 			new Thread(algorithm).start();
 			currentGeneration = 0;
 			generationLabel.setText("Generation: " + currentGeneration);

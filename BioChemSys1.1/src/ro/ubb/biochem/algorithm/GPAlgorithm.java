@@ -1,9 +1,11 @@
 package ro.ubb.biochem.algorithm;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ro.ubb.biochem.exceptions.InvalidInputException;
 import ro.ubb.biochem.exceptions.InvalidProgramException;
 import ro.ubb.biochem.gui.AlgorithmListener;
 import ro.ubb.biochem.gui.plotting.FitnessPlotWindow;
@@ -30,6 +32,7 @@ import ro.ubb.biochem.utils.SBMLExporter;
 @SuppressWarnings("all")
 public class GPAlgorithm implements Algorithm {
 
+	private static final String TARGET_BEHAVIOUR_INPUT_ERROR = "The input file cannot be found or is corrupt.";
 	private static final int SA_TRIGGERED_AFTER_NO_ITERATIONS = 75;
 	private static final double FITNESS_THRESHOLD = 0.3;
 	
@@ -49,8 +52,9 @@ public class GPAlgorithm implements Algorithm {
 	private boolean isStoppingCriterion = false;
 	
 
-	public GPAlgorithm(AlgorithmSettings settings) {
-		this.speciesInput = InputReader.readTargetBehavior(settings.getTargetBehaviorFile());
+	public GPAlgorithm(AlgorithmSettings settings) throws InvalidInputException {
+		readTargetBehaviourInputFile(settings);
+		
 		this.ruleRepository = InputReader.readPossibleCombinations(settings.getPossibleCombinationsFile());
 		this.ruleRepository.enrichRuleRepository(speciesInput.getPhase(0));
 		
@@ -71,6 +75,15 @@ public class GPAlgorithm implements Algorithm {
 		this.isStoppingCriterion = settings.isStoppingCriteria();
 
 		initializePopulation();
+	}
+
+	private void readTargetBehaviourInputFile(AlgorithmSettings settings)
+			throws InvalidInputException {
+		try {
+			this.speciesInput = InputReader.readTargetBehavior(settings.getTargetBehaviorFile());
+		} catch (NumberFormatException | IOException | InvalidInputException exception) {
+			throw new InvalidInputException(TARGET_BEHAVIOUR_INPUT_ERROR);
+		}
 	}
 
 	private void initializePopulation() {

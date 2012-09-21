@@ -4,15 +4,20 @@ import ro.ubb.biochem.gui.AlgorithmListener;
 import ro.ubb.biochem.population.Population;
 import ro.ubb.biochem.program.elements.Program;
 
-public interface Algorithm extends Runnable{
+/**
+ * @interface Interface for a generic "Genetic Programming" (GP) algorithm
+ */
+public interface Algorithm extends Runnable {
 
 	/**
-	 * creates separate thread for running the algorithm
+	 * Creates separate thread for running the algorithm
 	 */
 	public void run();
 	
 	/**
-	 * creates separate thread for running the algorithm
+	 * Creates separate thread for running the algorithm
+	 * 
+	 * @param initialPopulation The population with which the GP algorithm starts
 	 */
 	public void run(Population initialPopulation);
 	
@@ -23,4 +28,5 @@ public interface Algorithm extends Runnable{
 	public void reset();
 	
 	public void addAlgorithmListener(AlgorithmListener algorithmListener);
+	
 }
