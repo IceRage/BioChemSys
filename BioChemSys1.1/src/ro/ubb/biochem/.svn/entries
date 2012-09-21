@@ -1,0 +1,61 @@
+10
+
+dir
+5
+file:///D:/Repositories/BioChemSys/BioChemSys1.1/src/ro/ubb/biochem
+file:///D:/Repositories/BioChemSys
+
+
+
+2012-09-08T12:38:32.981000Z
+5
+Ovi
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+cf075928-9fc6-1a42-8121-c07d838bab58
+
+algorithm
+dir
+
+exceptions
+dir
+
+gui
+dir
+
+operators
+dir
+
+optim
+dir
+
+persistance
+dir
+
+population
+dir
+
+program
+dir
+
+reaction
+dir
+
+species
+dir
+
+utils
+dir
+
