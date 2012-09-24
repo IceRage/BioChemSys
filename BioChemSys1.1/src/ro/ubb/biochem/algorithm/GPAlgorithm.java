@@ -32,7 +32,6 @@ import ro.ubb.biochem.utils.SBMLExporter;
 @SuppressWarnings("all")
 public class GPAlgorithm implements Algorithm {
 
-	private static final String TARGET_BEHAVIOUR_INPUT_ERROR = "The input file cannot be found or is corrupt.";
 	private static final int SA_TRIGGERED_AFTER_NO_ITERATIONS = 75;
 	private static final double FITNESS_THRESHOLD = 0.3;
 	
@@ -55,10 +54,10 @@ public class GPAlgorithm implements Algorithm {
 	public GPAlgorithm(AlgorithmSettings settings) throws InvalidInputException {
 		readTargetBehaviourInputFile(settings);
 		
-		this.ruleRepository = InputReader.readPossibleCombinations(settings.getPossibleCombinationsFile());
-		this.ruleRepository.enrichRuleRepository(speciesInput.getPhase(0));
+		this.ruleRepository = InputReader.readTemplatesAndCreateRules(settings.getTemplatesFile(), speciesInput);
 		
-		System.out.println(ruleRepository.toString());
+		// ONLY FOR TESTING
+		System.out.println("Rules in rule repository: " + ruleRepository.toString());
 		
 		this.populationSize = settings.getPopulationSize();
 		this.maxIterations = settings.getMaxInterations();
@@ -81,8 +80,8 @@ public class GPAlgorithm implements Algorithm {
 			throws InvalidInputException {
 		try {
 			this.speciesInput = InputReader.readTargetBehavior(settings.getTargetBehaviorFile());
-		} catch (NumberFormatException | IOException | InvalidInputException exception) {
-			throw new InvalidInputException(TARGET_BEHAVIOUR_INPUT_ERROR);
+		} catch (InvalidInputException exception) {
+			throw exception;
 		}
 	}
 

@@ -1,14 +1,12 @@
 package ro.ubb.biochem.reaction.components;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 import ro.ubb.biochem.species.components.Specie;
-import ro.ubb.biochem.species.components.SpeciePool;
 
 public class RuleRepositoryImpl implements RuleRepository {
 
@@ -21,6 +19,7 @@ public class RuleRepositoryImpl implements RuleRepository {
 		this.rules = new ArrayList<Rule>();
 	}
 
+	@Override
 	public void addRule(Rule rule) {
 		if(!rules.contains(rule))
 			rules.add(rule);
@@ -125,40 +124,6 @@ public class RuleRepositoryImpl implements RuleRepository {
 		return specieList;
 	}
 
-	@Override
-	
-	public void enrichRuleRepository(SpeciePool pool) {
-		List<Specie> species = pool.getSpecies();
-		List<Specie> products, activeComplexex;
-		products =  new ArrayList<Specie>();
-		activeComplexex = new ArrayList<Specie>();
-		List<Specie> enzymesAndSubstrates = new ArrayList<Specie>();
-		for(Specie specie: species){
-			if(pool.getSpecieConcentration(specie).equals(new Double(0.0))){
-				if(specie.toString().contains("|")) activeComplexex.add(specie);
-				else products.add(specie);
-			} else {
-				enzymesAndSubstrates.add(specie);
-			}
-		}
-		
-		for(Specie activeComplex : activeComplexex){
-			String specieString = activeComplex.toString();
-			String[] composingSpecies = specieString.split("\\|");
-			List<Specie> composing = new ArrayList<Specie>();
-			for(String composingSpecie : composingSpecies){
-				composing.add(new Specie(composingSpecie));
-			}
-			addRule(new Rule(composing, Arrays.asList(activeComplex)));
-			addRule(new Rule(Arrays.asList(activeComplex), composing));
-			for(Specie product: products){
-				addRule(new Rule(Arrays.asList(activeComplex), Arrays.asList(composing.get(0), product)));
-			}
-		}
-		
-		printRules();
-	}
-	
 	@Override
 	public String toString() {
 		String r = "";

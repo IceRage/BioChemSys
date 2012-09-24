@@ -52,9 +52,9 @@ import ro.ubb.biochem.utils.ClassesFinder;
 
 public class GPUserFrame extends JFrame implements ActionListener, AlgorithmListener {
 
-	private static final String FILEPATH_OUTPUT = "C:\\Users\\Ovi\\Documents\\Eclipse\\BioChemSys1.1\\files\\rkip.xml";
-	private static final String FILEPATH_POSSIBLE_COMBINATIONS = "C:\\Users\\Ovi\\Documents\\Eclipse\\BioChemSys1.1\\files\\rkipRules.txt";
-	private static final String FILEPATH_TARGET_BEHAVIOUR = "C:\\Users\\Ovi\\Documents\\Eclipse\\BioChemSys1.1\\files\\rkipTarget.txt";
+	private static final String FILEPATH_OUTPUT = "h:\\git\\biochemsys\\BioChemSys1.1\\files\\rkip.xml";
+	private static final String FILEPATH_TEMPLATES = "h:\\git\\biochemsys\\BioChemSys1.1\\files\\rkipTemplates.txt";
+	private static final String FILEPATH_TARGET_BEHAVIOUR = "h:\\git\\biochemsys\\BioChemSys1.1\\files\\rkipTarget.txt";
 	private static final String BASE_PACKAGE = "ro.ubb.biochem.operators";
 	private static final long serialVersionUID = 1L;
 	
@@ -71,7 +71,7 @@ public class GPUserFrame extends JFrame implements ActionListener, AlgorithmList
 	private JPanel inputOutputPanel;
 	private JButton browsePCFBtn;
 	private JButton browseTBFBtn;
-	private JTextField possibleCombinationsTxt;
+	private JTextField templatesTxt;
 	private JTextField targetBehaviorTxt;
 	private JPanel gpPanel;
 	private JButton stopBtn;
@@ -169,15 +169,15 @@ public class GPUserFrame extends JFrame implements ActionListener, AlgorithmList
 				{
 					jLabel5 = new JLabel();
 					inputOutputPanel.add(jLabel5);
-					jLabel5.setText("Possible Combinations File:");
+					jLabel5.setText("Templates File:");
 					jLabel5.setBounds(13, 88, 182, 16);
 					jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 12));
 				}
 				{
-					possibleCombinationsTxt = new JTextField();
-					inputOutputPanel.add(possibleCombinationsTxt);
-					possibleCombinationsTxt.setBounds(13, 110, 182, 22);
-					possibleCombinationsTxt.setText(FILEPATH_POSSIBLE_COMBINATIONS);
+					templatesTxt = new JTextField();
+					inputOutputPanel.add(templatesTxt);
+					templatesTxt.setBounds(13, 110, 182, 22);
+					templatesTxt.setText(FILEPATH_TEMPLATES);
 				}
 				{
 					browseTBFBtn = new JButton();
@@ -429,12 +429,12 @@ public class GPUserFrame extends JFrame implements ActionListener, AlgorithmList
 			}
 			algorithmSettings.setTargetBehaviorFile(targetBehaviorFileName);
 
-			String possibleCombinationsFileName = possibleCombinationsTxt.getText();
-			if (possibleCombinationsFileName == null || possibleCombinationsFileName.equals("")) {
-				showErrorMessage("You must provide a file with possible combinations.");
+			String templatesFilePath = templatesTxt.getText();
+			if (templatesFilePath == null || templatesFilePath.equals("")) {
+				showErrorMessage("You must provide a file with templates.");
 				return;
 			}
-			algorithmSettings.setPossibleCombinationsFile(possibleCombinationsFileName);
+			algorithmSettings.setTemplatesFile(templatesFilePath);
 			
 			algorithmSettings.setOutputFileName(outputFileTxt.getText());
 
@@ -583,7 +583,7 @@ public class GPUserFrame extends JFrame implements ActionListener, AlgorithmList
 			if (whichFile == 1) {
 				targetBehaviorTxt.setText(fileChooser.getSelectedFile().getAbsolutePath());
 			} else if(whichFile == 2) {
-				possibleCombinationsTxt.setText(fileChooser.getSelectedFile().getAbsolutePath());
+				templatesTxt.setText(fileChooser.getSelectedFile().getAbsolutePath());
 			} else {
 				outputFileTxt.setText(fileChooser.getSelectedFile().getAbsolutePath());
 			}

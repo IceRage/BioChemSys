@@ -18,7 +18,7 @@ public class AlgorithmSettings {
 	
 	private String targetBehaviorFile;
 	
-	private String possibleCombinationsFile;
+	private String templatesFile;
 	
 	private String outputFileName;
 	
@@ -64,12 +64,12 @@ public class AlgorithmSettings {
 		this.targetBehaviorFile = targetBehaviorFile;
 	}
 
-	public String getPossibleCombinationsFile() {
-		return possibleCombinationsFile;
+	public String getTemplatesFile() {
+		return templatesFile;
 	}
 
-	public void setPossibleCombinationsFile(String possibleCombinationsFile) {
-		this.possibleCombinationsFile = possibleCombinationsFile;
+	public void setTemplatesFile(String templatesFile) {
+		this.templatesFile = templatesFile;
 	}
 
 	public List<Mutation> getMutationOps() {
