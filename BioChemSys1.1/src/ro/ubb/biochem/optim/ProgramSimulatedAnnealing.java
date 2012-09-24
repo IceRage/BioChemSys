@@ -4,7 +4,7 @@ import java.util.Random;
 
 import ro.ubb.biochem.gui.plotting.FitnessPlotWindow;
 import ro.ubb.biochem.program.elements.FitnessFunction;
-import ro.ubb.biochem.program.elements.FitnessFunction1;
+import ro.ubb.biochem.program.elements.FitnessFunctionImpl;
 import ro.ubb.biochem.program.elements.Program;
 import ro.ubb.biochem.species.components.SpeciePoolEvolution;
 
@@ -40,7 +40,7 @@ public class ProgramSimulatedAnnealing {
 		this.setProgram(program);
 		fitness = (program.getFitness() == null)? Double.MAX_VALUE : program.getFitness();
 		temperature = maxTemerature;
-		fct = new FitnessFunction1(expectedEvolution);
+		fct = new FitnessFunctionImpl(expectedEvolution);
 		this.plotter = plotter;
 	}
 	

@@ -6,7 +6,10 @@ import ro.ubb.biochem.exceptions.InvalidInputException;
 import ro.ubb.biochem.reaction.components.Reaction;
 import ro.ubb.biochem.species.components.SpeciePool;
 
-
+/**
+ * An instance of a class which implements this interface corresponds to
+ * a chromosome/individual in the GP algorithm population
+ */
 public interface Program  {
 	
 	public SpeciePool run(SpeciePool input, Integer time) throws InvalidInputException;

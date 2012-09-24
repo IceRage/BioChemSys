@@ -3,7 +3,7 @@ package ro.ubb.biochem.utils;
 import java.util.Arrays;
 
 import ro.ubb.biochem.exceptions.InvalidInputException;
-import ro.ubb.biochem.program.elements.Program1;
+import ro.ubb.biochem.program.elements.ProgramImpl;
 import ro.ubb.biochem.reaction.components.Reaction;
 import ro.ubb.biochem.reaction.components.Rule;
 import ro.ubb.biochem.species.components.Specie;
@@ -42,7 +42,7 @@ public class GenerateRightBehaviour {
 	 * @throws InvalidInputException
 	 */
 	public static void main(String[] args) throws InvalidInputException {
-		Program1 p = getJAKSTATGoodProgram();
+		ProgramImpl p = getJAKSTATGoodProgram();
 		SpeciePool pool = getJAKSTATSpeciePool();
 		for (int i = 1; i <= 16; i++) {
 			System.out.println((i - 1) + "|" + pool);
@@ -51,8 +51,8 @@ public class GenerateRightBehaviour {
 		
 	}
 
-	public static Program1 getRKIPGoodProgram() {
-		Program1 program1 = new Program1();
+	public static ProgramImpl getRKIPGoodProgram() {
+		ProgramImpl program1 = new ProgramImpl();
 		program1.setFitness(0.5331624292082779);
 		program1.setMaxKineticRateStep(2.932393360645528);
 
@@ -143,8 +143,8 @@ public class GenerateRightBehaviour {
 		return pool;
 	}
 
-	public static Program1 getJAKSTATGoodProgram() {
-		Program1 program1 = new Program1();
+	public static ProgramImpl getJAKSTATGoodProgram() {
+		ProgramImpl program1 = new ProgramImpl();
 		program1.setFitness(0.5331624292082779);
 		program1.setMaxKineticRateStep(2.932393360645528);
 
@@ -168,8 +168,8 @@ public class GenerateRightBehaviour {
 
 	}
 
-	public static Program1 getGoodProgram() {
-		Program1 program1 = new Program1();
+	public static ProgramImpl getGoodProgram() {
+		ProgramImpl program1 = new ProgramImpl();
 		program1.setFitness(0.5331624292082779);
 		program1.setMaxKineticRateStep(2.932393360645528);
 

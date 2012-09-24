@@ -6,21 +6,21 @@ import java.util.Set;
 
 import ro.ubb.biochem.exceptions.InvalidProgramException;
 import ro.ubb.biochem.program.elements.Program;
-import ro.ubb.biochem.program.elements.Program1;
+import ro.ubb.biochem.program.elements.ProgramImpl;
 import ro.ubb.biochem.reaction.components.Reaction;
 
 public class CutAndSpliceCrossoverForProgram1 implements Crossover {
 
 	@Override
 	public Program generateOffsrping(Program firstParent, Program secondParent) throws InvalidProgramException {
-		if (!(firstParent instanceof Program1) || !(secondParent instanceof Program1)) {
+		if (!(firstParent instanceof ProgramImpl) || !(secondParent instanceof ProgramImpl)) {
 			throw new InvalidProgramException();
 		}
 		Set<Reaction> firstParentReactions = new HashSet<Reaction>();
 		Set<Reaction> secondParentReactions = new HashSet<Reaction>();
-		firstParentReactions.addAll(((Program1) firstParent).clone().getReactions());
-		secondParentReactions.addAll(((Program1) secondParent).clone().getReactions());
-		Program1 offspring = new Program1();
+		firstParentReactions.addAll(((ProgramImpl) firstParent).clone().getReactions());
+		secondParentReactions.addAll(((ProgramImpl) secondParent).clone().getReactions());
+		ProgramImpl offspring = new ProgramImpl();
 		offspring.setMaxKineticRateStep((firstParent.getMaxKineticRateStep() + secondParent
 				.getMaxKineticRateStep()) / 2);
 		Random randomGenerator = new Random();

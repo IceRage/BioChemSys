@@ -10,21 +10,21 @@ import ro.ubb.biochem.program.elements.FitnessFunction;
 import ro.ubb.biochem.program.elements.Program;
 import ro.ubb.biochem.program.elements.ProgramGenerator;
 
-public class Population1 implements Population {
+public class PopulationImpl implements Population {
 
 	private List<Program> programs;
 	private List<Double> fitness;
 	private FitnessFunction fitnessFunction;
 	private ProgramGenerator programGenerator;
 
-	public Population1(FitnessFunction fitnessFunction, ProgramGenerator programGenerator) {
+	public PopulationImpl(FitnessFunction fitnessFunction, ProgramGenerator programGenerator) {
 		this.programs = new ArrayList<Program>();
 		this.fitness = new ArrayList<Double>();
 		this.fitnessFunction = fitnessFunction;
 		this.programGenerator = programGenerator;
 	}
 
-	public Population1(Integer size, FitnessFunction fitnessFunction, ProgramGenerator programGenerator) {
+	public PopulationImpl(Integer size, FitnessFunction fitnessFunction, ProgramGenerator programGenerator) {
 		this.programs = new ArrayList<Program>();
 		this.fitness = new ArrayList<Double>();
 		this.fitnessFunction = fitnessFunction;
@@ -32,7 +32,7 @@ public class Population1 implements Population {
 		initialize(size);
 	}
 
-	public Population1(List<Program> programs, FitnessFunction fitnessFunction, ProgramGenerator programGenerator) {
+	public PopulationImpl(List<Program> programs, FitnessFunction fitnessFunction, ProgramGenerator programGenerator) {
 		this.programs = new ArrayList<Program>();
 		this.fitness = new ArrayList<Double>();
 		for (Program p : programs) {
@@ -174,7 +174,7 @@ public class Population1 implements Population {
 	}
 
 	public Population clone() {
-		Population1 newPop = new Population1(fitnessFunction, programGenerator);
+		PopulationImpl newPop = new PopulationImpl(fitnessFunction, programGenerator);
 		newPop.fitness = new ArrayList<Double>();
 		newPop.programs = new ArrayList<Program>();
 		newPop.fitness.addAll(fitness);

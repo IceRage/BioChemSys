@@ -14,7 +14,7 @@ import ro.ubb.biochem.species.components.SpeciePool;
 import flanagan.integration.DerivnFunction;
 import flanagan.integration.RungeKutta;
 
-public class Program1 implements Program {
+public class ProgramImpl implements Program {
 
 	private List<Reaction> reactions;
 	private Double maxKineticRateStep;
@@ -31,12 +31,12 @@ public class Program1 implements Program {
 	}
 
 
-	public Program1() {
+	public ProgramImpl() {
 		reactions = new ArrayList<Reaction>();
 		maxKineticRateStep = 1.0;
 	}
 
-	public Program1(List<Reaction> reactions) {
+	public ProgramImpl(List<Reaction> reactions) {
 		this.reactions = reactions;
 		maxKineticRateStep = 1.0;
 	}
@@ -59,12 +59,12 @@ public class Program1 implements Program {
 	public SpeciePool run(SpeciePool input, Integer time) throws InvalidInputException {
 		Derivative der = new Derivative(input);
 
-		int noEq = input.getSpecies().size();
+		int nrOfEquations = input.getSpecies().size();
 		double h = 0.1;
 		double t0 = 0;
 		double tn = time;
-		double[] m0 = new double[noEq];
-		double[] mn = new double[noEq];
+		double[] m0 = new double[nrOfEquations];
+		double[] mn = new double[nrOfEquations];
 		m0 = extractPreviousConcentrations(m0, input);
 
 		RungeKutta rk = new RungeKutta();
@@ -100,19 +100,19 @@ public class Program1 implements Program {
 		return m0;
 	}
 
-	public Program1 clone() {
+	public ProgramImpl clone() {
 		List<Reaction> reactionsCopy = new ArrayList<Reaction>();
 		for (Reaction r : reactions) {
 			reactionsCopy.add(r.clone());
 		}
-		Program1 newProgram = new Program1(reactionsCopy);
+		ProgramImpl newProgram = new ProgramImpl(reactionsCopy);
 		newProgram.setMaxKineticRateStep(maxKineticRateStep);
 		return newProgram;
 	}
 
 	public boolean equals(Object obj) {
-		if (obj instanceof Program1) {
-			List<Reaction> otherProgramReactions = ((Program1) obj).getReactions();
+		if (obj instanceof ProgramImpl) {
+			List<Reaction> otherProgramReactions = ((ProgramImpl) obj).getReactions();
 			for (Reaction r : otherProgramReactions) {
 				if (!this.reactions.contains(r)) {
 					return false;

@@ -5,7 +5,7 @@ import java.util.Random;
 
 import ro.ubb.biochem.exceptions.InvalidProgramException;
 import ro.ubb.biochem.program.elements.Program;
-import ro.ubb.biochem.program.elements.Program1;
+import ro.ubb.biochem.program.elements.ProgramImpl;
 import ro.ubb.biochem.reaction.components.Reaction;
 import ro.ubb.biochem.reaction.components.Rule;
 import ro.ubb.biochem.reaction.components.RuleRepository;
@@ -24,11 +24,11 @@ public class SpecieReplaceMutationForProgram1 implements Mutation {
 
 	@Override
 	public Program mutate(Program program) throws InvalidProgramException {
-		if (!(program instanceof Program1)) {
+		if (!(program instanceof ProgramImpl)) {
 			throw new InvalidProgramException();
 		}
 		Random randomGenerator = new Random();
-		Program1 program1 = (Program1) program.clone();
+		ProgramImpl program1 = (ProgramImpl) program.clone();
 		List<Reaction> reactions = program1.getReactions();
 		if (!reactions.isEmpty()) {
 			Reaction selectedReaction = reactions.get(randomGenerator.nextInt(reactions.size()));

@@ -11,7 +11,7 @@ import ro.ubb.biochem.species.components.SpeciePoolEvolution;
  * 
  * 
  */
-public class FitnessFunction1 implements FitnessFunction {
+public class FitnessFunctionImpl implements FitnessFunction {
 
 	private static final Double PENALTY_FOR_MISSING_SPECIE = 0.1;
 	private static final Double PENALTY_FOR_EXTRA_SPECIE = 0.1;
@@ -19,7 +19,7 @@ public class FitnessFunction1 implements FitnessFunction {
 
 	private SpeciePoolEvolution speciePoolEvolution;
 
-	public FitnessFunction1(SpeciePoolEvolution speciePoolEvolution) {
+	public FitnessFunctionImpl(SpeciePoolEvolution speciePoolEvolution) {
 		this.setSpeciePoolEvolution(speciePoolEvolution);
 	}
 

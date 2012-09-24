@@ -21,10 +21,10 @@ import ro.ubb.biochem.optim.ProgramSimulatedAnnealing;
 import ro.ubb.biochem.optim.SimulatedAnnealingThread;
 import ro.ubb.biochem.persistance.InputReader;
 import ro.ubb.biochem.population.Population;
-import ro.ubb.biochem.population.Population1;
-import ro.ubb.biochem.program.elements.FitnessFunction1;
+import ro.ubb.biochem.population.PopulationImpl;
+import ro.ubb.biochem.program.elements.FitnessFunctionImpl;
 import ro.ubb.biochem.program.elements.Program;
-import ro.ubb.biochem.program.elements.ProgramGeneratorForProgram1;
+import ro.ubb.biochem.program.elements.ProgramGeneratorForProgramImpl;
 import ro.ubb.biochem.reaction.components.RuleRepository;
 import ro.ubb.biochem.species.components.SpeciePoolEvolution;
 import ro.ubb.biochem.utils.SBMLExporter;
@@ -56,9 +56,6 @@ public class GPAlgorithm implements Algorithm {
 		
 		this.ruleRepository = InputReader.readTemplatesAndCreateRules(settings.getTemplatesFile(), speciesInput);
 		
-		// ONLY FOR TESTING
-		System.out.println("Rules in rule repository: " + ruleRepository.toString());
-		
 		this.populationSize = settings.getPopulationSize();
 		this.maxIterations = settings.getMaxInterations();
 		this.mutationsOps = settings.getMutationOps();
@@ -86,8 +83,8 @@ public class GPAlgorithm implements Algorithm {
 	}
 
 	private void initializePopulation() {
-		this.population = new Population1(populationSize, new FitnessFunction1(speciesInput),
-				new ProgramGeneratorForProgram1(ruleRepository));
+		this.population = new PopulationImpl(populationSize, new FitnessFunctionImpl(speciesInput),
+				new ProgramGeneratorForProgramImpl(ruleRepository));
 	}
 
 	public void addAlgorithmListener(AlgorithmListener algorithmListener) {
@@ -97,7 +94,7 @@ public class GPAlgorithm implements Algorithm {
 	/**
 	 * Run the main Genetic Programming algorithm
 	 * 
-	 * Prec: The population has already been initialized
+	 * The population has already been initialised
 	 */
 	@Override
 	public void run() {

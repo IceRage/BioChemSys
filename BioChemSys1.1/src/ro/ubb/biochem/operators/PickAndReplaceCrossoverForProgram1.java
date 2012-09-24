@@ -5,7 +5,7 @@ import java.util.Random;
 
 import ro.ubb.biochem.exceptions.InvalidProgramException;
 import ro.ubb.biochem.program.elements.Program;
-import ro.ubb.biochem.program.elements.Program1;
+import ro.ubb.biochem.program.elements.ProgramImpl;
 import ro.ubb.biochem.reaction.components.Reaction;
 
 public class PickAndReplaceCrossoverForProgram1 implements Crossover {
@@ -14,11 +14,11 @@ public class PickAndReplaceCrossoverForProgram1 implements Crossover {
 
 	@Override
 	public Program generateOffsrping(Program firstParent, Program secondParent) throws InvalidProgramException {
-		if (!(firstParent instanceof Program1) || !(secondParent instanceof Program1)) {
+		if (!(firstParent instanceof ProgramImpl) || !(secondParent instanceof ProgramImpl)) {
 			throw new InvalidProgramException();
 		}
-		Program1 offspring = ((Program1) firstParent).clone();
-		Program1 parent = ((Program1) secondParent);
+		ProgramImpl offspring = ((ProgramImpl) firstParent).clone();
+		ProgramImpl parent = ((ProgramImpl) secondParent);
 		List<Reaction> offspringReactions = offspring.getReactions();
 		List<Reaction> parentReactions = parent.getReactions();
 		Random randomGenerator = new Random();
