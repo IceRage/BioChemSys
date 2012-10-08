@@ -29,15 +29,15 @@ public class FitnessFunctionImpl implements FitnessFunction {
 		Double penalty = 0.0;
 		Double penaltyExtra = 0.0;
 		Double penaltyMissing = 0.0;
-		SpeciePool initialPhase = speciePoolEvolution.getPhase(0);
+		SpeciePool inputPhase = speciePoolEvolution.getPhase(0);
 		for (int i = 1; i < speciePoolEvolution.getNumberOfPhases(); i++) {
 			try {
-				SpeciePool output = program.run(initialPhase, speciePoolEvolution.getTime(i)
+				SpeciePool outputPhase = program.run(inputPhase, speciePoolEvolution.getTime(i)
 						- speciePoolEvolution.getTime(i - 1));
-				fitness += computeDifferences(output, speciePoolEvolution.getPhase(i));
-				penaltyExtra += computePenaltyExtra(output, speciePoolEvolution.getPhase(i));
-				penaltyMissing += computePentaltyMissing(output, speciePoolEvolution.getPhase(i));
-				initialPhase = output;
+				fitness += computeDifferences(outputPhase, speciePoolEvolution.getPhase(i));
+				penaltyExtra += computePenaltyExtra(outputPhase, speciePoolEvolution.getPhase(i));
+				penaltyMissing += computePentaltyMissing(outputPhase, speciePoolEvolution.getPhase(i));
+				inputPhase = outputPhase;
 			} catch (InvalidInputException ex) {
 				ex.printStackTrace();
 			}

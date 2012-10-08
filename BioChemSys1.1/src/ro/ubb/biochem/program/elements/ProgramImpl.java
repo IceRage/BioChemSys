@@ -1,9 +1,7 @@
 package ro.ubb.biochem.program.elements;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ro.ubb.biochem.exceptions.InvalidInputException;
 import ro.ubb.biochem.reaction.components.Reaction;
@@ -57,7 +55,7 @@ public class ProgramImpl implements Program {
 
 	@Override
 	public SpeciePool run(SpeciePool input, Integer time) throws InvalidInputException {
-		Derivative der = new Derivative(input);
+		SystemOfDerivatives systemOfDerivatives = new SystemOfDerivatives(input);
 
 		int nrOfEquations = input.getSpecies().size();
 		double h = 0.1;
@@ -72,7 +70,7 @@ public class ProgramImpl implements Program {
 		rk.setFinalValueOfX(tn);
 		rk.setInitialValuesOfY(m0);
 		rk.setStepSize(h);
-		mn = rk.fourthOrder(der);
+		mn = rk.fourthOrder(systemOfDerivatives);
 		
 		return createCorrespondingSpeciePool(mn, input);
 	}
@@ -94,9 +92,11 @@ public class ProgramImpl implements Program {
 	 */
 	private double[] extractPreviousConcentrations(double[] m0, SpeciePool input) {
 		List<Specie> species = input.getSpecies();
+		
 		for (int i = 0; i < species.size(); i++) {
 			m0[i] = input.getSpecieConcentration(species.get(i));
 		}
+		
 		return m0;
 	}
 
@@ -130,47 +130,65 @@ public class ProgramImpl implements Program {
 	}
 
 	/**
-	 * Class to hold the system of differential equation for the bio-network
+	 * Class to hold the system of differential equations for the biological network
 	 * 
-	 * @author Silvia Rausanu
+	 * Class implements interface which provides the abstract method
+	 * through which a set of ODEs may be coded and supplied to the class RungeKutta
 	 */
-	class Derivative implements DerivnFunction {
+	class SystemOfDerivatives implements DerivnFunction {
 
 		private SpeciePool input;
 
-		public Derivative(SpeciePool input) {
+		public SystemOfDerivatives(SpeciePool input) {
 			this.input = input;
 		}
 
+		/**
+		 * Returns a vector which contains the values of the derivatives of each place with 
+		 * respect to time (i.e. d(place_i) / d(time), for all places "i")
+		 * 
+		 * In the bio-chemical context this vector actually represents
+		 * the derivative of each of the species with respect to time
+		 * 
+		 * In order to compute these value, the law of "Mass Action Kinetics" is considered.
+		 * 
+		 * @param time The value of the time variable
+		 * @param currentMarking The current marking of the Petri net
+		 */
 		@Override
-		public double[] derivn(double t, double[] m) {
+		public double[] derivn(double time, double[] currentMarking) {
 
-			double[] dmdt = new double[input.getSpecies().size()];
+			double[] derivativePlaceOverDerivativeTime = new double[input.getSpecies().size()];
 			List<Specie> species = input.getSpecies();
-			Map<Specie, Integer> specieIndexMap = new HashMap<Specie, Integer>();
+
 			for (int i = 0; i < species.size(); i++) {
-				specieIndexMap.put(species.get(i), i);
-			}
-			for (int i = 0; i < species.size(); i++) {
-				Specie s = species.get(i);
-				for (Reaction r : reactions) {
-					Rule currentRule = r.getPattern();
-					if (currentRule.getLhs().contains(s)) {
+				Specie specie = species.get(i);
+				
+				for (Reaction reaction : reactions) {
+					Rule currentRule = reaction.getPattern();
+					
+					if (currentRule.getLhs().contains(specie)) {
 						Double negativeTerm = -1.0;
-						for (Specie sp : currentRule.getLhs()) {
-							negativeTerm *= m[specieIndexMap.get(sp)];
+						
+						for (Specie currentRuleSpecie : currentRule.getLhs()) {
+							negativeTerm *= currentMarking[species.indexOf(currentRuleSpecie)];
 						}
-						dmdt[i] += negativeTerm * r.getKineticRate();
-					} else if (currentRule.getRhs().contains(s)) {
+						
+						derivativePlaceOverDerivativeTime[i] += negativeTerm * reaction.getKineticRate();
+					} else if (currentRule.getRhs().contains(specie)) {
 						Double positiveTerm = 1.0;
-						for (Specie sp : currentRule.getLhs()) {
-							positiveTerm *= m[specieIndexMap.get(sp)];
+						
+						for (Specie currentRuleSpecie : currentRule.getLhs()) {
+							positiveTerm *= currentMarking[species.indexOf(currentRuleSpecie)];
 						}
-						dmdt[i] += positiveTerm * r.getKineticRate();
+						
+						derivativePlaceOverDerivativeTime[i] += positiveTerm * reaction.getKineticRate();
 					}
 				}
 			}
-			return dmdt;
+			
+			return derivativePlaceOverDerivativeTime;
+			
 		}
 	}
 
