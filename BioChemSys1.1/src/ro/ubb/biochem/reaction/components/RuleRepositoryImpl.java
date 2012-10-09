@@ -72,8 +72,8 @@ public class RuleRepositoryImpl implements RuleRepository {
 	}
 
 	@Override
-	public Double getNumberOfRules() {
-		return (double) rules.size();
+	public int getNumberOfRules() {
+		return rules.size();
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SpeciePhase implements SpeciePool{
+public class SpeciePhase implements SpeciePool {
 	
 	private Map<Specie, Double> specieConcentrationsPhase;
 	
@@ -18,6 +18,11 @@ public class SpeciePhase implements SpeciePool{
 		return new ArrayList<Specie>(specieConcentrationsPhase.keySet());
 	}
 
+	@Override
+	public boolean containsSpecie(Specie specie) {
+		return specieConcentrationsPhase.keySet().contains(specie);
+	}
+	
 	@Override
 	public Double getSpecieConcentration(Specie specie) {
 		return specieConcentrationsPhase.get(specie);

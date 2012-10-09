@@ -84,8 +84,32 @@ public class InputReader {
 		List<Rule> generatedRules = convertStringsToRules(generatedRulesAsStrings);
 
 		addRulesToRepository(generatedRules, ruleRepository);
+		addGeneratedSpeciesToSpeciePool(ruleRepository.getSpecies(), speciePool);
 
 		return ruleRepository;
+	}
+
+	/**
+	 * Add the generated species to the existing specie pool
+	 * 
+	 * Prec: The initial set of species was already initialised
+	 * 
+	 * @param listOfAllSpecies The list of all species = initial species (i.e. for which the concentrations are known) +
+	 * 													 species which were generated afterwards
+	 * @param speciePool The already initialised instance of the SpeciePoolEvolution class
+	 */
+	private static void addGeneratedSpeciesToSpeciePool(List<Specie> listOfAllSpecies, SpeciePoolEvolution speciePool) {
+		if (listOfAllSpecies != null) {
+			Set<Specie> initialSpeciesSet = speciePool.getSpecieSet();
+			
+			if (initialSpeciesSet != null) {
+				for (Specie specie : listOfAllSpecies) {
+					if (!initialSpeciesSet.contains(specie)) {
+						speciePool.addGeneratedSpecie(specie);
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -94,8 +118,7 @@ public class InputReader {
 	 * @param generatedRules The list of generated rules
 	 * @param ruleRepository Repository in which all rules will be inserted
 	 */
-	private static void addRulesToRepository(List<Rule> generatedRules,
-			RuleRepository ruleRepository) {
+	private static void addRulesToRepository(List<Rule> generatedRules, RuleRepository ruleRepository) {
 		for (Rule tmpRule : generatedRules) {
 			ruleRepository.addRule(tmpRule);
 		}

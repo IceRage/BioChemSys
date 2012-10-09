@@ -16,7 +16,7 @@ public interface RuleRepository {
 	
 	public List<Rule> getRulesForLhs(List<Specie> species);
 
-	public Double getNumberOfRules();
+	public int getNumberOfRules();
 	
 	public List<Rule> getRandomSetOfRules(Integer requiredSetSize);
 

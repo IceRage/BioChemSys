@@ -9,8 +9,6 @@ import ro.ubb.biochem.reaction.components.RuleRepository;
 
 public class ProgramGeneratorForProgramImpl implements ProgramGenerator {
 
-	private final static Double MAX_PROGRAM_DIMENSION_RATIO = 0.8;
-
 	private RuleRepository ruleRepository;
 
 	public ProgramGeneratorForProgramImpl(RuleRepository ruleRepository) {
@@ -21,8 +19,7 @@ public class ProgramGeneratorForProgramImpl implements ProgramGenerator {
 	public Program generate() {
 		ProgramImpl program = new ProgramImpl();
 
-		Integer programSize = new Random().nextInt((int) Math.round(ruleRepository
-				.getNumberOfRules() * MAX_PROGRAM_DIMENSION_RATIO)) + 1;
+		Integer programSize = new Random().nextInt(ruleRepository.getNumberOfRules()) + 1;
 
 		List<Rule> ruleList = ruleRepository.getRandomSetOfRules(programSize);
 		

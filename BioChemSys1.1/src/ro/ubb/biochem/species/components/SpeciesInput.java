@@ -26,6 +26,11 @@ public class SpeciesInput implements SpeciePool{
 		return species;
 	}
 
+	@Override
+	public boolean containsSpecie(Specie specie) {
+		return species.contains(specie);
+	}
+	
 	public void setSpecies(List<Specie> species) {
 		this.species = species;
 	}
@@ -47,6 +52,5 @@ public class SpeciesInput implements SpeciePool{
 	public void addConcentration(Specie specie, Double concentration) {
 		throw new UnsupportedOperationException();
 	}
-	
 
 }

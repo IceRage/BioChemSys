@@ -7,7 +7,10 @@ public interface SpeciePool {
 
 	public List<Specie> getSpecies();
 	
+	public boolean containsSpecie(Specie specie);
+	
 	public Double getSpecieConcentration(Specie specie);
 	
 	public void addConcentration(Specie specie, Double concentration);
+	
 }
