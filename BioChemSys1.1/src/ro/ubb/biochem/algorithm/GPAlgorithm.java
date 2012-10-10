@@ -99,10 +99,7 @@ public class GPAlgorithm implements Algorithm {
 		int currentIteration = 0;
 		
 		while (isStoppingCriterionNotMet(currentIteration)) {
-			long startTime = System.nanoTime();
 			doIteration();
-			double elapsedTime = (System.nanoTime() - startTime) * 1e-9;
-			System.out.println("Iteration time: " + elapsedTime);
 			
 			for (AlgorithmListener algorithmListener : algorithmListenerList) {
 				algorithmListener.newGenerationCreatedNotification();
