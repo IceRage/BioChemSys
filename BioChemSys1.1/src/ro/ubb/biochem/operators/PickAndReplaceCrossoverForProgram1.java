@@ -13,7 +13,7 @@ public class PickAndReplaceCrossoverForProgram1 implements Crossover {
 	private static final Integer MAX_NUMBER_OF_TRIES = 15;
 
 	@Override
-	public Program generateOffsrping(Program firstParent, Program secondParent) throws InvalidProgramException {
+	public Program generateOffspring(Program firstParent, Program secondParent) throws InvalidProgramException {
 		if (!(firstParent instanceof ProgramImpl) || !(secondParent instanceof ProgramImpl)) {
 			throw new InvalidProgramException();
 		}

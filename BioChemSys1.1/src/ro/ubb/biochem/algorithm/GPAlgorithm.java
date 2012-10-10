@@ -1,6 +1,5 @@
 package ro.ubb.biochem.algorithm;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,7 +7,6 @@ import java.util.Random;
 import ro.ubb.biochem.exceptions.InvalidInputException;
 import ro.ubb.biochem.exceptions.InvalidProgramException;
 import ro.ubb.biochem.gui.AlgorithmListener;
-import ro.ubb.biochem.gui.plotting.FitnessPlotWindow;
 import ro.ubb.biochem.operators.Crossover;
 import ro.ubb.biochem.operators.DeletionForProgram1;
 import ro.ubb.biochem.operators.InsertionForProgram1;
@@ -17,7 +15,6 @@ import ro.ubb.biochem.operators.Mutation;
 import ro.ubb.biochem.operators.Selection;
 import ro.ubb.biochem.operators.SpecieReplaceMutationForProgram1;
 import ro.ubb.biochem.optim.AnnealedProgramsGatherer;
-import ro.ubb.biochem.optim.ProgramSimulatedAnnealing;
 import ro.ubb.biochem.optim.SimulatedAnnealingThread;
 import ro.ubb.biochem.persistance.InputReader;
 import ro.ubb.biochem.population.Population;
@@ -27,6 +24,7 @@ import ro.ubb.biochem.program.elements.Program;
 import ro.ubb.biochem.program.elements.ProgramGeneratorForProgramImpl;
 import ro.ubb.biochem.reaction.components.RuleRepository;
 import ro.ubb.biochem.species.components.SpeciePoolEvolution;
+import ro.ubb.biochem.tests.util.ExecutionTimer;
 import ro.ubb.biochem.utils.SBMLExporter;
 
 @SuppressWarnings("all")
@@ -94,14 +92,18 @@ public class GPAlgorithm implements Algorithm {
 	/**
 	 * Run the main Genetic Programming algorithm
 	 * 
-	 * The population has already been initialised
+	 * Prec: The population has already been initialised
 	 */
 	@Override
 	public void run() {
 		int currentIteration = 0;
 		
 		while (isStoppingCriterionNotMet(currentIteration)) {
+			// TODO: Remove source code for displaying elapsed time
+			long startTime = System.nanoTime();
 			doIteration();
+			double elapsedTime = (System.nanoTime() - startTime) * 1e-9;
+			System.out.println("Iteration time: " + elapsedTime);
 			
 			for (AlgorithmListener algorithmListener : algorithmListenerList) {
 				algorithmListener.newGenerationCreatedNotification();
@@ -191,7 +193,7 @@ public class GPAlgorithm implements Algorithm {
 		Program offspring = null;
 		try {
 			if(crossoverParents != null && crossoverParents.size() > 1) {
-				offspring = crossoverOp.generateOffsrping(crossoverParents.get(0), crossoverParents.get(1));
+				offspring = crossoverOp.generateOffspring(crossoverParents.get(0), crossoverParents.get(1));
 				offspring = applyMutations(offspring); 
 			}
 		} catch (InvalidProgramException e1) {

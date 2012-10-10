@@ -5,6 +5,6 @@ import ro.ubb.biochem.program.elements.Program;
 
 public interface Crossover {
 
-	public Program generateOffsrping(Program firstParent, Program secondParent)
+	public Program generateOffspring(Program firstParent, Program secondParent)
 			throws InvalidProgramException;
 }

@@ -126,7 +126,7 @@ public class ConcentrationsPlotWindow extends javax.swing.JFrame {
 		Double y = targetEvolution.getPhase(0).getSpecieConcentration(selectedSpecie) * 100;
 		targetPointList.add(new PlotPoint(x, y));
 		actualPointList.add(new PlotPoint(x, y));
-		SpeciePool initialPool = targetEvolution.getPhase(0);
+		SpeciePool initialPool = targetEvolution.getInitialPhase();
 
 		Double minX = x;
 		Double maxX = x;

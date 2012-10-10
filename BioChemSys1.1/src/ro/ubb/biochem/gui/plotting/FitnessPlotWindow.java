@@ -89,7 +89,7 @@ public class FitnessPlotWindow extends javax.swing.JFrame implements AlgorithmLi
 	public void newGenerationCreatedNotification(Double fitness, Program program){
 		System.out.println("Best fitness: " + fitness);
 		System.out.println("Best program: " + program);
-		System.out.println(program.getReactionNo());
+		System.out.println("Number of reactions: " + program.getReactionNo());
 		if (numberOfDataPieces >= NUMBER_OF_TIME_STEPS) {
 			dataList.remove();
 		}

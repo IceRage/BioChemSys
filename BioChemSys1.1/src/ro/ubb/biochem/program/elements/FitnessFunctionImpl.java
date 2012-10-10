@@ -23,6 +23,7 @@ public class FitnessFunctionImpl implements FitnessFunction {
 		this.setSpeciePoolEvolution(speciePoolEvolution);
 	}
 
+	// TODO: Remove source code for displaying elapsed time
 	@Override
 	public synchronized double computeFitness(Program program) {
 		Double fitness = 0.0;
@@ -31,6 +32,7 @@ public class FitnessFunctionImpl implements FitnessFunction {
 		Double penaltyMissing = 0.0;
 		SpeciePool inputPhase = speciePoolEvolution.getInitialPhase();
 
+		long startTime = System.nanoTime();
 		for (int i = 1; i < speciePoolEvolution.getNumberOfPhases(); i++) {
 			try {
 				SpeciePool outputPhase = program.run(inputPhase, speciePoolEvolution.getTime(i)
@@ -54,6 +56,9 @@ public class FitnessFunctionImpl implements FitnessFunction {
 		program.setFitness(fitness);
 		program.setPenaltyExtra(penaltyExtra);
 		program.setPenaltyMissing(penaltyMissing);
+		
+		double elapsedTime = (System.nanoTime() - startTime) * 1e-9;
+		System.out.println("Compute fitness time: " + elapsedTime);
 
 		return fitness;
 	}

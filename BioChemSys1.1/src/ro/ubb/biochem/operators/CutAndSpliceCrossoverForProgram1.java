@@ -12,7 +12,7 @@ import ro.ubb.biochem.reaction.components.Reaction;
 public class CutAndSpliceCrossoverForProgram1 implements Crossover {
 
 	@Override
-	public Program generateOffsrping(Program firstParent, Program secondParent) throws InvalidProgramException {
+	public Program generateOffspring(Program firstParent, Program secondParent) throws InvalidProgramException {
 		if (!(firstParent instanceof ProgramImpl) || !(secondParent instanceof ProgramImpl)) {
 			throw new InvalidProgramException();
 		}
