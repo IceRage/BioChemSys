@@ -7,6 +7,8 @@ public interface SpeciePool {
 
 	public List<Specie> getSpecies();
 	
+	public int getNumberOfSpecies();
+	
 	public boolean containsSpecie(Specie specie);
 	
 	public Double getSpecieConcentration(Specie specie);

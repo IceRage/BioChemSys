@@ -1,6 +1,6 @@
 package ro.ubb.biochem.species.components;
 
-public class Specie {
+public class Specie implements Comparable<Specie> {
 
 	private String name;
 	
@@ -41,6 +41,10 @@ public class Specie {
 		
 		return true;
 	}
-	
+
+	@Override
+	public int compareTo(Specie specie) {
+		return this.name.compareTo(specie.name);
+	}
 	
 }

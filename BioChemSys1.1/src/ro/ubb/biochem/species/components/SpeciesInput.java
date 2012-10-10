@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class SpeciesInput implements SpeciePool{
+public class SpeciesInput implements SpeciePool {
 	
 	private List<Specie> species;
 	private LinkedHashMap<Specie, List<Double>> concentrations;
@@ -24,6 +24,11 @@ public class SpeciesInput implements SpeciePool{
 
 	public List<Specie> getSpecies() {
 		return species;
+	}
+	
+	@Override
+	public int getNumberOfSpecies() {
+		return species.size();
 	}
 
 	@Override

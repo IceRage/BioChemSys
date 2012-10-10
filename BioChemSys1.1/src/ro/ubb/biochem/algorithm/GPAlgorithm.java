@@ -31,7 +31,7 @@ import ro.ubb.biochem.utils.SBMLExporter;
 public class GPAlgorithm implements Algorithm {
 
 	private static final int SA_TRIGGERED_AFTER_NO_ITERATIONS = 75;
-	private static final double FITNESS_THRESHOLD = 0.3;
+	private static final double FITNESS_THRESHOLD = 1E-7;
 	
 	private SpeciePoolEvolution speciesInput;
 	private RuleRepository ruleRepository;
@@ -99,7 +99,6 @@ public class GPAlgorithm implements Algorithm {
 		int currentIteration = 0;
 		
 		while (isStoppingCriterionNotMet(currentIteration)) {
-			// TODO: Remove source code for displaying elapsed time
 			long startTime = System.nanoTime();
 			doIteration();
 			double elapsedTime = (System.nanoTime() - startTime) * 1e-9;

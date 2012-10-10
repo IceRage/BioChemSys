@@ -1,16 +1,16 @@
 package ro.ubb.biochem.species.components;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class SpeciePhase implements SpeciePool {
 	
-	private Map<Specie, Double> specieConcentrationsPhase;
+	private SortedMap<Specie, Double> specieConcentrationsPhase;
 	
 	public SpeciePhase() {
-		specieConcentrationsPhase = new LinkedHashMap<Specie, Double>();
+		specieConcentrationsPhase = new TreeMap<Specie, Double>();
 	}
 	
 	@Override
@@ -18,6 +18,11 @@ public class SpeciePhase implements SpeciePool {
 		return new ArrayList<Specie>(specieConcentrationsPhase.keySet());
 	}
 
+	@Override
+	public int getNumberOfSpecies() {
+		return specieConcentrationsPhase.size();
+	}
+	
 	@Override
 	public boolean containsSpecie(Specie specie) {
 		return specieConcentrationsPhase.keySet().contains(specie);
