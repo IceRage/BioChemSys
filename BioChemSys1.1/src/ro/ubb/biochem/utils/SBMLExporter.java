@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBException;
 import ro.ubb.biochem.program.elements.Program;
 import ro.ubb.biochem.species.components.Specie;
 import ro.ubb.biochem.species.components.SpeciePool;
+import ro.ubb.biochem.temp.OutputWriter;
 import ro.ubb.biochem.utils.export.Apply;
 import ro.ubb.biochem.utils.export.KineticLaw;
 import ro.ubb.biochem.utils.export.Math;
@@ -35,7 +36,7 @@ public class SBMLExporter {
 					Species.class, SpeciesReference.class, SysBioMarkLang.class);
 			StringWriter writer = new StringWriter();
 	        jaxbContext.createMarshaller().marshal(smbl, writer);
-	        System.out.println(writer.toString());
+	        OutputWriter.println(writer.toString());
 	        
 	        try{
 		        exportFile = new File(exportFileName);

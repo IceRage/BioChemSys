@@ -24,12 +24,14 @@ import ro.ubb.biochem.program.elements.Program;
 import ro.ubb.biochem.program.elements.ProgramGeneratorForProgramImpl;
 import ro.ubb.biochem.reaction.components.RuleRepository;
 import ro.ubb.biochem.species.components.SpeciePoolEvolution;
+import ro.ubb.biochem.temp.OutputWriter;
 import ro.ubb.biochem.tests.util.ExecutionTimer;
 import ro.ubb.biochem.utils.SBMLExporter;
 
 @SuppressWarnings("all")
 public class GPAlgorithm implements Algorithm {
 
+	private static final String SA_START_MSG = "================= Start pool for SA =================";
 	private static final int SA_TRIGGERED_AFTER_NO_ITERATIONS = 75;
 	private static final double FITNESS_THRESHOLD = 1E-7;
 	
@@ -136,7 +138,7 @@ public class GPAlgorithm implements Algorithm {
     }
 
 	public void kickStartSimulatedAnnealing(){
-		System.out.println("Start pool for SA");
+		OutputWriter.println(SA_START_MSG);
 		AnnealedProgramsGatherer gatherer = new AnnealedProgramsGatherer();
 		List<Thread> annealedSimulators = new ArrayList<Thread>();
 		List<Program> toAnneal = selectionCrossoverOp.select(population, populationSize/2 + 1);

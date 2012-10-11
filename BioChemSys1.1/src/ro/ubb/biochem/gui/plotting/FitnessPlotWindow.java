@@ -11,6 +11,7 @@ import javax.swing.WindowConstants;
 import ro.ubb.biochem.algorithm.Algorithm;
 import ro.ubb.biochem.gui.AlgorithmListener;
 import ro.ubb.biochem.program.elements.Program;
+import ro.ubb.biochem.temp.OutputWriter;
 
 public class FitnessPlotWindow extends javax.swing.JFrame implements AlgorithmListener {
 
@@ -87,9 +88,9 @@ public class FitnessPlotWindow extends javax.swing.JFrame implements AlgorithmLi
 	}
 	
 	public void newGenerationCreatedNotification(Double fitness, Program program){
-		System.out.println("Best fitness: " + fitness);
-		System.out.println("Best program: " + program);
-		System.out.println("Number of reactions: " + program.getReactionNo());
+		OutputWriter.println("Best fitness: " + fitness);
+		OutputWriter.println("Best program: " + program);
+		OutputWriter.println("Number of reactions: " + program.getReactionNo());
 		if (numberOfDataPieces >= NUMBER_OF_TIME_STEPS) {
 			dataList.remove();
 		}

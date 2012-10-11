@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Set;
 
 import ro.ubb.biochem.species.components.Specie;
+import ro.ubb.biochem.temp.OutputWriter;
 
 public class RuleRepositoryImpl implements RuleRepository {
 
@@ -140,13 +141,13 @@ public class RuleRepositoryImpl implements RuleRepository {
 	 */
 	public void printRules() {
 		if ((rules != null) && (rules.size() > 0)) {
-			System.out.println(MSG_LIST_OF_RULES);
+			OutputWriter.println(MSG_LIST_OF_RULES);
 			
 			for (Rule rule : rules) {
-				System.out.println(rule);
+				OutputWriter.println(rule.toString());
 			}
 		} else {
-			System.out.println(MSG_EMPTY_LIST_OF_RULES);
+			OutputWriter.println(MSG_EMPTY_LIST_OF_RULES);
 		}
 	}
 

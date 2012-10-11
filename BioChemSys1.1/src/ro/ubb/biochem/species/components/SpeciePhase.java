@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import ro.ubb.biochem.temp.OutputWriter;
+
 public class SpeciePhase implements SpeciePool {
 	
 	private SortedMap<Specie, Double> specieConcentrationsPhase;
@@ -40,7 +42,7 @@ public class SpeciePhase implements SpeciePool {
 	
 	public String toString(){
 		String toS = "";
-		System.out.println(getSpecies());
+		OutputWriter.println("Species from phase: " + getSpecies().toString());
 		for(Specie s: getSpecies()){
 			if(!toS.equals("")) toS+="|";
 			toS += getSpecieConcentration(s).toString();

@@ -9,6 +9,7 @@ import java.util.Set;
 import ro.ubb.biochem.program.elements.FitnessFunction;
 import ro.ubb.biochem.program.elements.Program;
 import ro.ubb.biochem.program.elements.ProgramGenerator;
+import ro.ubb.biochem.temp.OutputWriter;
 
 public class PopulationImpl implements Population {
 
@@ -44,7 +45,8 @@ public class PopulationImpl implements Population {
 
 	@Override
 	public Program getBestProgram() {
-		System.out.println(fitness.get(0));
+		OutputWriter.println("Best program fitness: " + fitness.get(0));
+		
 		if (!programs.isEmpty()) {
 			return programs.get(0);
 		} else {
