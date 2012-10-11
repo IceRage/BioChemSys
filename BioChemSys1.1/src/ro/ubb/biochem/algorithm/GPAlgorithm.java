@@ -109,11 +109,6 @@ public class GPAlgorithm implements Algorithm {
 			
 			currentIteration++;
 			
-			Integer extra = 0;
-			Integer missing = 0;
-			
-			countPenalizedPrograms(extra, missing);
-			
 			if(currentIteration % SA_TRIGGERED_AFTER_NO_ITERATIONS == 0) {
 				kickStartSimulatedAnnealing();
 			}
@@ -251,12 +246,4 @@ public class GPAlgorithm implements Algorithm {
 		initializePopulation();
 	}
 	
-	public void countPenalizedPrograms(Integer extra, Integer missing){
-		for(Program program: selectionCrossoverOp.select(population, populationSize/2)){
-			if(program.getPenaltyExtra() > 0.0)
-				extra++;
-			if(program.getPenaltyMissing() > 0.0)
-				missing++;
-		}
-	}
 }

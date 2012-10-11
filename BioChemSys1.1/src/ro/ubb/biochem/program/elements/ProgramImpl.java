@@ -23,8 +23,6 @@ public class ProgramImpl implements Program {
 
 	private Double maxKineticRateStep;
 	private Double fitness;
-	private Double penaltyExtra;
-	private Double penaltyMissing;
 
 
 	public ProgramImpl() {
@@ -328,22 +326,6 @@ public class ProgramImpl implements Program {
 	@Override
 	public Double getMaxKineticRateStep() {
 		return maxKineticRateStep;
-	}
-
-	public Double getPenaltyExtra() {
-		return penaltyExtra;
-	}
-
-	public void setPenaltyExtra(Double penaltyExtra) {
-		this.penaltyExtra = penaltyExtra;
-	}
-
-	public Double getPenaltyMissing() {
-		return penaltyMissing;
-	}
-
-	public void setPenaltyMissing(Double penaltyMissing) {
-		this.penaltyMissing = penaltyMissing;
 	}
 
 }

@@ -28,12 +28,4 @@ public interface Program  {
 
 	public void setFitness(Double fitness);
 	
-	public Double getPenaltyExtra();
-
-	public void setPenaltyExtra(Double penaltyExtra);
-
-	public Double getPenaltyMissing();
-
-	public void setPenaltyMissing(Double penaltyMissing);
-	
 }
