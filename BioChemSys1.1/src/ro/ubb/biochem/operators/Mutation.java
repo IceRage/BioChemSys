@@ -6,5 +6,5 @@ import ro.ubb.biochem.program.elements.Program;
 public interface Mutation {
 
 	public Program mutate(Program program) throws InvalidProgramException;
-	
+		
 }

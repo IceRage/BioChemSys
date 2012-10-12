@@ -6,10 +6,8 @@ import ro.ubb.biochem.species.components.SpeciePool;
 import ro.ubb.biochem.species.components.SpeciePoolEvolution;
 
 /**
- * Sum of differences between actual and target results averaged over timesteps
- * + penalty function
- * 
- * 
+ * Minimizing differences between actual and target results averaged over time steps
+ * + minimizing the number of reactions in each individual 
  */
 public class FitnessFunctionImpl implements FitnessFunction {
 
@@ -18,9 +16,14 @@ public class FitnessFunctionImpl implements FitnessFunction {
 	private static final Double MAX_KINETIC_RATE_ADJUSTMENT = 50.0;
 
 	private SpeciePoolEvolution speciePoolEvolution;
+	private int maxNumberOfSpecies;
 
+	
 	public FitnessFunctionImpl(SpeciePoolEvolution speciePoolEvolution) {
 		this.setSpeciePoolEvolution(speciePoolEvolution);
+		
+		int numberOfSpecies = speciePoolEvolution.getNumberOfSpecies();
+		maxNumberOfSpecies = (numberOfSpecies * numberOfSpecies) * (numberOfSpecies - 1);
 	}
 
 	@Override
@@ -74,7 +77,7 @@ public class FitnessFunctionImpl implements FitnessFunction {
 	 * @return Non-negative subunitary corresponding number
 	 */
 	private double changeToSubunitary(int supraUnitaryNumber) {
-		return (supraUnitaryNumber/Integer.MAX_VALUE);
+		return (supraUnitaryNumber/maxNumberOfSpecies);
 	}
 	
 }

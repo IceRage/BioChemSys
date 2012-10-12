@@ -8,8 +8,8 @@ import ro.ubb.biochem.exceptions.InvalidInputException;
 import ro.ubb.biochem.exceptions.InvalidProgramException;
 import ro.ubb.biochem.gui.AlgorithmListener;
 import ro.ubb.biochem.operators.Crossover;
-import ro.ubb.biochem.operators.DeletionForProgram1;
-import ro.ubb.biochem.operators.InsertionForProgram1;
+import ro.ubb.biochem.operators.DeletionForProgramImpl;
+import ro.ubb.biochem.operators.InsertionForProgramImpl;
 import ro.ubb.biochem.operators.KineticRateAlterationForProgram1;
 import ro.ubb.biochem.operators.Mutation;
 import ro.ubb.biochem.operators.Selection;
@@ -206,8 +206,8 @@ public class GPAlgorithm implements Algorithm {
 	private Program applyMutations(Program offspring) throws InvalidProgramException {
 		int numberOfMutationOps = mutationsOps.size();
 		for (Mutation m : mutationsOps) {
-			if (m instanceof KineticRateAlterationForProgram1 || m instanceof InsertionForProgram1 || 
-					m instanceof DeletionForProgram1 ||
+			if (m instanceof KineticRateAlterationForProgram1 || m instanceof InsertionForProgramImpl || 
+					m instanceof DeletionForProgramImpl ||
 					randomizer.nextDouble() < mutationProbability) {
 				offspring = m.mutate(offspring);
 			}
@@ -235,8 +235,8 @@ public class GPAlgorithm implements Algorithm {
 		for (Mutation mutation : mutationsOps) {
 			if (mutation instanceof SpecieReplaceMutationForProgram1) {
 				((SpecieReplaceMutationForProgram1) mutation).setRuleRepository(ruleRepository);
-			} else if (mutation instanceof InsertionForProgram1) {
-				((InsertionForProgram1) mutation).setRuleRepository(ruleRepository);
+			} else if (mutation instanceof InsertionForProgramImpl) {
+				((InsertionForProgramImpl) mutation).setRuleRepository(ruleRepository);
 			}
 		}
 	}

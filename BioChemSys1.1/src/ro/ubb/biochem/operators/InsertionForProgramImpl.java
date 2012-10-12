@@ -9,7 +9,7 @@ import ro.ubb.biochem.program.elements.ProgramImpl;
 import ro.ubb.biochem.reaction.components.Reaction;
 import ro.ubb.biochem.reaction.components.RuleRepository;
 
-public class InsertionForProgram1 implements Mutation {
+public class InsertionForProgramImpl implements Mutation {
 
 	private RuleRepository ruleRepository;
 

@@ -36,22 +36,22 @@ public class Rule {
 			Rule otherRule = (Rule) obj;
 			for (Specie s : this.lhs) {
 				if (!otherRule.lhs.contains(s)) {
-					equal = false;
+					return false;
 				}
 			}
 			for (Specie s : this.rhs) {
 				if (!otherRule.rhs.contains(s)) {
-					equal = false;
+					return false;
 				}
 			}
 			for (Specie s : otherRule.lhs) {
 				if (!this.lhs.contains(s)) {
-					equal = false;
+					return false;
 				}
 			}
 			for (Specie s : otherRule.rhs) {
 				if (!this.rhs.contains(s)) {
-					equal = false;
+					return false;
 				}
 			}
 			return equal;
